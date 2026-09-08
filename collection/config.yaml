@@ -1,0 +1,22 @@
+output_root: recordings
+queue_size: 256
+fps: 30
+max_image_error_ms: 18
+max_pose_error_ms: 30
+glove_max_gap_ms: 30
+topics:
+  image: /camera/camera/color/image_raw
+  camera_info: /camera/camera/color/camera_info
+  left_pose: /tracking/hex_prism_1/pose
+  right_pose: /tracking/hex_prism_2/pose
+  left_glove: /glove/left/sample
+  right_glove: /glove/right/sample
+  left_timing: /glove/left/timing
+  right_timing: /glove/right/timing
+  odometry: /rtabmap/odom
+teleop:
+  movement_enabled: false
+  world_frame: odom
+  camera_frame: camera_color_optical_frame
+  max_age_s: 0.25
+  future_tolerance_s: 0.03
