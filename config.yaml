@@ -1,0 +1,52 @@
+# Dual hexagonal-prism tracking configuration; restart after editing.
+camera:
+  backend: realsense      # realsense or opencv (ordinary USB RGB camera; hand tracking only)
+  device: /dev/video0     # Used by the opencv backend
+  calibration_file: ""   # Required for opencv; relative to this config, e.g. calibration/usb_640x480.yaml
+  serial_number: ""        # Empty selects automatically; specify the serial number for multiple cameras
+  width: 424
+  height: 240
+  fps: 60
+
+tags:
+  dictionary: DICT_4X4_250
+  hexagon_tag_black_size: 0.048  # Black marker side length in meters
+  hexagon_1_ids: [0, 1, 2, 3, 4, 5]
+  hexagon_2_ids: [6, 7, 8, 9, 10, 11]
+
+hexagon:
+  hexagon_size: 0.06       # Regular hexagon cross-section side length in meters
+  hexagon_height: 0.06     # Rendered height in meters; adjust to the physical object
+  face_direction: 1       # Marker ordering direction: 1 or -1; preserves the existing rotation compensation
+
+display:
+  enabled: true           # false disables the window; press Ctrl+C to stop
+  window_name: Hexagon Tracker
+  show_markers: true
+  show_axes: true
+  show_prism: true
+  show_info: false
+  axis_length: 0.06        # Meters; affects visualization only
+  line_thickness: 2
+  prism_1_color: [0, 255, 0]    # BGR
+  prism_2_color: [255, 0, 255]
+
+update:
+  interval: 0.02          # Minimum pose computation/transmission interval; theoretical 50Hz ceiling, not guaranteed
+
+filter:                  # One Euro filter: retain the tuned parameters
+  reset_after: 0.5        # Reinitialize from the next measurement after this many seconds without observations
+  position:
+    min_cutoff: 1.0       # Hz; lower values smooth more but increase slow-motion lag
+    beta: 8.0            # Higher values track motion faster but may increase jitter
+    d_cutoff: 1.0
+  rotation:
+    min_cutoff: 1.0
+    beta: 0.8
+    d_cutoff: 1.0
+
+tcp_server:
+  enabled: true
+  host: 127.0.0.1
+  port: 8888
+  send_timeout: 0.05     # Seconds; disconnect slow clients on timeout and allow reconnection
