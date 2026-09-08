@@ -1,0 +1,58 @@
+# Shared ROS 2 pipeline. Tracking/camera color/filter settings remain in ../config.yaml.
+camera:
+  namespace: camera
+  name: camera
+  depth_width: 480
+  depth_height: 270
+  depth_fps: 60
+  # Depth is aligned to the RGB image size by the RealSense node.
+
+topics:
+  color: /camera/camera/color/image_raw
+  camera_info: /camera/camera/color/camera_info
+  depth: /camera/camera/aligned_depth_to_color/image_raw
+  odometry: /rtabmap/odom
+  pose_prefix: /tracking
+  camera_pose: /rtabmap/camera_pose
+
+tracking:
+  sync_queue_size: 5        # RGB + CameraInfo exact timestamp synchronization
+  max_image_age: 0.25      # Discard queued old images (seconds, ROS clock)
+
+rtabmap:
+  frame_id: camera_link
+  odom_frame_id: odom
+  namespace: rtabmap
+  approx_sync_max_interval: 0.03
+  topic_queue_size: 5
+  sync_queue_size: 10
+  visualization: false     # Use the separate camera-motion view instead of the native RTAB window
+  # Empty path uses the ROS default ~/.ros/rtabmap.db; no automatic deletion.
+  database_path: ""
+
+odometry_bridge:
+  show_position: true     # Print camera coordinates and displacement from the first valid pose
+  console_interval: 0.5    # Seconds; limit console output frequency
+  tcp_enabled: false       # Optional legacy snapshot service on connection
+  tcp_host: 127.0.0.1
+  tcp_port: 8889
+  max_pose_age: 0.5        # Do not serve stale/invalid odometry
+
+views:
+  hands:
+    enabled: true
+    fixed_frame: camera_color_optical_frame  # Camera origin; must match the image header frame
+    topic: /tracking/hand_markers
+    hand_frames: [hand_1, hand_2]            # Hexagonal-prism centers, not offset wrist points
+    stale_timeout: 0.3                     # Seconds; hide lost objects and stop updating their TF
+    axis_length: 0.10                      # Meters; positive X/Y/Z are red/green/blue
+  camera:
+    enabled: true
+    topic: /rtabmap/camera_motion_markers
+    world_frame: map                       # Resolve through TF; do not relabel odom as map
+    reference_frame: camera_start          # Position and orientation of the first valid localization
+    stale_timeout: 0.5
+    axis_length: 0.15
+    trail_max_points: 3000
+    sample_distance: 0.005                 # Meters; do not append a trail point below this displacement
+    update_rate: 20.0
