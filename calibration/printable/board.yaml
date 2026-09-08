@@ -1,0 +1,6 @@
+# Matches the restored charuco_board.png; measure physical dimensions in meters.
+dictionary: DICT_6X6_250
+squares_x: 5
+squares_y: 7
+square_length: 0.040
+marker_length: 0.020
