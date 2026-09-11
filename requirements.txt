@@ -1,0 +1,10 @@
+# PyPI dependencies for the non-ROS Python modules and utilities.
+# ROS 2 packages (rclpy, cv_bridge, message types, TF, RealSense and
+# RTAB-Map) must be installed through the Ubuntu/ROS package manager.
+# LeRobot is installed separately by collection/setup_export.bash.
+
+numpy>=1.21,<2
+scipy>=1.8,<2
+PyYAML>=5.4,<7
+pyserial>=3.5,<4
+opencv-contrib-python>=4.5.4,<4.12

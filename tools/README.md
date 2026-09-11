@@ -4,6 +4,8 @@
 
 命令从项目根目录执行，普通工具不需要相机或STM32连接。
 
+使用系统ROS环境时按根README通过apt安装依赖。只运行非ROS工具时，可创建Python虚拟环境并执行`.venv/bin/python -m pip install -r requirements.txt`；之后将下表命令中的`python3`替换为`.venv/bin/python`。requirements中的`opencv-contrib-python`提供`cv2.aruco`。
+
 | 命令 | 用途 |
 |---|---|
 | `python3 -B -m tools.check_config` | 校验跟踪/共享相机配置；不验证硬件支持的流组合 |

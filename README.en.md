@@ -36,6 +36,16 @@ Center one tag on each outer side face, including along the prism axis. All prin
 
 The current target is Ubuntu22.04 / ROS2 Humble with /usr/bin/python3. Install/configure ROS2 Humble separately before installing these dependencies; do not mix Conda packages into the ROS system Python.
 
+The root `requirements.txt` lists the **PyPI Python dependencies** used by the project: NumPy, SciPy, PyYAML, pyserial and OpenCV with the ArUco module. It intentionally excludes ROS 2, RealSense, RTAB-Map, `cv_bridge` and LeRobot. For non-ROS utilities such as offline tag generation, ordinary-camera calibration and serial logging, create an isolated environment:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+Use `.venv/bin/python` for commands in that environment. Do not use it as a replacement for the ROS environment: install the complete ROS workflow through apt as shown below and continue using `/usr/bin/python3`. `opencv-contrib-python` supplies the required `cv2.aruco` module; do not install another `opencv-python` variant beside it. `collection/setup_export.bash` installs LeRobot into the separate `.venv-lerobot`, so it is not part of the base requirements.
+
 ```bash
 sudo apt update
 sudo apt install ros-humble-realsense2-camera ros-humble-rtabmap-ros ros-humble-rviz2 \

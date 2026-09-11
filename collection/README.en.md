@@ -33,7 +33,7 @@ bash collection/setup_export.bash
 
 Replay follows source image timestamps, q exits, and a graphical desktop is required. It does not publish ROS or robot commands. Reports include event counts, image gaps on the target grid and five observation-validity counts. Episode metadata is loaded into memory; prefer short segments of tens of seconds to a few minutes.
 
-Recording/review do not require LeRobot. Export installs isolated LeRobot0.4.3 dependencies, including potentially large PyTorch downloads; python3-venv and suitable FFmpeg/PyAV support are needed. The output path must be new; multiple saved episodes can be supplied. No automatic Hub upload. Real MP4/Parquet export has not been tested end-to-end; a synthetic writer verifies API flow and segmentation.
+Base Python dependencies are listed in the root `requirements.txt`; ROS messages and `cv_bridge` still come from apt. Recording/review do not require LeRobot. Export installs LeRobot0.4.3 into the separate `.venv-lerobot`, including potentially large PyTorch downloads; python3-venv and suitable FFmpeg/PyAV support are needed. Do not add LeRobot to the base requirements or install it into the system ROS Python. The output path must be new; multiple saved episodes can be supplied. No automatic Hub upload. Real MP4/Parquet export has not been tested end-to-end; a synthetic writer verifies API flow and segmentation.
 
 Default export is30Hz: images and poses use nearby observations within configured tolerances, while glove channels interpolate by channel timestamps without bridging sequence gaps. Missing images split segments rather than compressing elapsed time. Backward clocks or changed coordinate frames reject export. Matching tolerances are not measured absolute clock accuracy.
 

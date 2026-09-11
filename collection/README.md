@@ -56,7 +56,7 @@ ros2 param set /human_recorder task '放下杯子'
 
 ## LeRobot观察数据导出
 
-录制/回放不依赖LeRobot。导出在隔离环境中安装，可能下载较大的PyTorch等依赖，需要网络和足够磁盘。系统需python3-venv；图像视频编码依赖环境中的FFmpeg/PyAV支持。
+基础Python依赖见根目录`requirements.txt`，ROS消息和`cv_bridge`仍通过apt安装。录制/回放不依赖LeRobot。导出在独立的`.venv-lerobot`中安装，可能下载较大的PyTorch等依赖，需要网络和足够磁盘。系统需python3-venv；图像视频编码依赖环境中的FFmpeg/PyAV支持。不要把LeRobot加入基础requirements或安装进系统ROS Python。
 
 ```bash
 bash collection/setup_export.bash

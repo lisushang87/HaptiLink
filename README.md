@@ -69,6 +69,16 @@ STL 不携带单位。不要把所有文件统一“缩放到相同尺寸”。�
 
 基于 Ubuntu 22.04 / ROS 2 Humble，运行节点使用 `/usr/bin/python3`。不要把 Conda 的 OpenCV、NumPy 随意混装进系统 ROS Python。
 
+根目录的 `requirements.txt` 记录项目使用的 **PyPI Python依赖**：NumPy、SciPy、PyYAML、pyserial和带ArUco模块的OpenCV。它不包含ROS 2、RealSense、RTAB-Map、`cv_bridge`或LeRobot。只使用离线标签生成、普通相机标定、串口记录等非ROS工具时，可以建立独立环境：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+运行命令时相应使用 `.venv/bin/python`。不要用这个环境替代ROS环境；完整ROS流程建议按下面的apt方式安装，并继续使用 `/usr/bin/python3`。`opencv-contrib-python`包含本工程需要的`cv2.aruco`；不要同时安装另一个`opencv-python`变体。LeRobot导出依赖由`collection/setup_export.bash`安装到单独的`.venv-lerobot`，不属于基础requirements。
+
 在已经安装并配置好 ROS 2 Humble 的机器上，安装所需组件：
 
 ```bash

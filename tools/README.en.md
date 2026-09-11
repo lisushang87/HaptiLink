@@ -4,6 +4,8 @@
 
 Run from the root using /usr/bin/python3;no camera or glove is needed.
 
+For the system ROS environment, install dependencies through apt as documented in the root README. For non-ROS tools only, create a Python virtual environment and run `.venv/bin/python -m pip install -r requirements.txt`; then replace `python3` below with `.venv/bin/python`. The requirements use `opencv-contrib-python` to provide `cv2.aruco`.
+
 |Command|Purpose|
 |---|---|
 |python3 -B -m tools.check_config|Validate tracking/shared settings,not hardware stream support|
