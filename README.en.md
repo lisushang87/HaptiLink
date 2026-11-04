@@ -14,7 +14,7 @@ The tracked point is the prism center, not the wrist or robot tool. Glove values
 
 ![Printed parts](doc/pictrue/enhanced/04-printed-parts.png)
 
-Only the latest seven retouched photographs are retained in the [image directory](doc/pictrue/enhanced/). Photos are illustrative; use the original electrical design and measured dimensions for assembly.
+The [image directory](doc/pictrue/enhanced/) contains photographs of the project's physical hardware and fabricated parts. For wiring and dimensions, refer to the original electrical design files and measurements of the actual hardware.
 
 ## Recommended workflow
 
