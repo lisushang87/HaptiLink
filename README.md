@@ -109,7 +109,7 @@ ROS安装本身请使用官方安装说明；上面的apt命令不负责配置RO
 
 ## 3. STM32编译、烧录与采样配置
 
-[STM32/](STM32/README.md) 包含固件、PCB和蓝牙脚本。目标为STM32F103C8，工程按8MHz外部晶振、72MHz系统时钟构建，烧录前核对实物。
+[STM32/](STM32/README.md) 包含固件、PCB和蓝牙脚本。手套主控芯片型号为 **STM32F103C8T6**（STM32F103C8 系列，64 KB Flash / 20 KB SRAM）。工程按8MHz外部晶振、72MHz系统时钟构建，烧录前核对实物芯片丝印及板卡接线。
 
 ```bash
 sudo apt install --no-install-recommends gcc-arm-none-eabi binutils-arm-none-eabi \
