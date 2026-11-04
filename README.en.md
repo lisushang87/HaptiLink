@@ -71,7 +71,7 @@ Press c to capture, q to solve. The ChArUco dictionary is DICT_6X6_250, differen
 
 ## STM32: build, flash and choose a rate
 
-Target: STM32F103C8,64KiB Flash/20KiB RAM,8MHz external crystal and72MHz system clock. Verify the actual board first.
+Glove MCU model: **STM32F103C8T6** (STM32F103C8 family, 64 KiB Flash / 20 KiB RAM), with an 8 MHz external crystal and 72 MHz system clock. Verify the actual chip marking and board wiring before flashing.
 
 ```bash
 sudo apt install --no-install-recommends gcc-arm-none-eabi binutils-arm-none-eabi \
